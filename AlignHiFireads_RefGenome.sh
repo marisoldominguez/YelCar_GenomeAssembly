@@ -13,7 +13,7 @@ pbmm2 align /path/refgenome.fasta /path/hifi.subreads.fasta /path/ref_Gfortis.mo
 samtools view /path/ref_Gfortis.movie.bam | awk '{ mc=""; for(i=12;i<=NF;i++) { split($i,TAG,":"); if(TAG[1]=="mc") {mc=TAG[3]; break; } } if(mc != "") { print $1 "\t" mc; } }' > /path/MappedConcordance.HiFiReadSet.GenomeGfortis.out
 
 #To extract read length metrics
-samtools view /path/ref_Gfortis.movie.bam | head -n 4763 | cut -f 10 | perl -ne 'chomp;print length($_) . "\n"' | sort | uniq -c > /path/MappedRL.HiFiReadSet.GenomeGfortis.out
+samtools view /path/ref_Gfortis.movie.bam | cut -f 10 | perl -ne 'chomp;print length($_) . "\n"' | sort | uniq -c > /path/MappedRL.HiFiReadSet.GenomeGfortis.out
 
 #coverage metrics
 samtools depth -a /path/ref_Gfortis.movie.bam > /path/HiFiReadSet.REFGfortis.sorted.Depth.out
